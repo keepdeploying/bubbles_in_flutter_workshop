@@ -19,8 +19,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final chats = ChatsService.instance;
+
     return MaterialApp(
       initialRoute: '/',
+      onGenerateInitialRoutes: (_) {
+        return [
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+          if (chats.launchContact != null)
+            MaterialPageRoute(
+              builder: (_) => ChatScreen(contact: chats.launchContact!),
+            ),
+        ];
+      },
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
           return MaterialPageRoute(
