@@ -1,9 +1,11 @@
-import 'package:conversation_bubbles/conversation_bubbles.dart';
 import 'package:bubbles_in_flutter/models/contact.dart';
+import 'package:conversation_bubbles/conversation_bubbles.dart';
 import 'package:flutter/services.dart';
 
 class BubblesService {
   final _conversationBubblesPlugin = ConversationBubbles();
+  bool _isInBubble = false;
+  bool get isInBubble => _isInBubble;
 
   static final instance = BubblesService._();
 
@@ -14,6 +16,7 @@ class BubblesService {
       appIcon: '@mipmap/ic_launcher',
       fqBubbleActivity: 'com.example.bubbles_in_flutter.BubbleActivity',
     );
+    _isInBubble = await _conversationBubblesPlugin.isInBubble();
   }
 
   Future<void> show(
