@@ -1,5 +1,6 @@
 import 'package:bubbles_in_flutter/models/contact.dart';
 import 'package:bubbles_in_flutter/services/chats_service.dart';
+import 'package:bubbles_in_flutter/services/notifications_permissions_service.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final chats = ChatsService.instance;
+  final notifService = NotificationsPermissionService.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,19 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('People'),
         actions: [
+          StreamBuilder(
+            stream: notifService.isGrantedStream,
+            builder: (context, snap) {
+              // snap.data is nullable
+              if (snap.data != true) {
+                return IconButton(
+                  icon: const Icon(Icons.notifications_on_outlined),
+                  onPressed: notifService.request,
+                );
+              }
+              return const SizedBox();
+            },
+          ),
           IconButton(onPressed: chats.clear, icon: const Icon(Icons.refresh))
         ],
       ),
