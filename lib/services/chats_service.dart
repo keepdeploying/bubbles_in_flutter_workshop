@@ -4,6 +4,7 @@ import 'package:bubbles_in_flutter/models/contact.dart';
 import 'package:bubbles_in_flutter/models/message.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:bubbles_in_flutter/services/bubbles_service.dart';
 
 class ChatsService {
   late final Isar _db;
@@ -82,6 +83,7 @@ class ChatsService {
     Timer(const Duration(seconds: 5), () async {
       final reply = _reply(contact: contact, text: text);
       await _db.writeTxn(() async => await _db.messages.put(reply));
+      await BubblesService.instance.show(contact, reply.text);
     });
   }
 }

@@ -2,6 +2,7 @@ import 'package:bubbles_in_flutter/models/contact.dart';
 import 'package:bubbles_in_flutter/models/message.dart';
 import 'package:bubbles_in_flutter/services/chats_service.dart';
 import 'package:flutter/material.dart';
+import 'package:bubbles_in_flutter/services/bubbles_service.dart';
 
 class ChatScreen extends StatefulWidget {
   final Contact contact;
@@ -13,6 +14,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final bubbles = BubblesService.instance;
   final chats = ChatsService.instance;
   final scrollCtrl = ScrollController();
   final textCtrl = TextEditingController();
@@ -32,6 +34,13 @@ class _ChatScreenState extends State<ChatScreen> {
             Text(widget.contact.name),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.open_in_new),
+            onPressed: () =>
+                bubbles.show(widget.contact, '', shouldAutoExpand: true),
+          ),
+        ],
       ),
       body: StreamBuilder<List<Message>>(
         stream: chats.getMessages(widget.contact.id),

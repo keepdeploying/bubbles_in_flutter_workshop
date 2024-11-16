@@ -3,11 +3,13 @@ import 'package:bubbles_in_flutter/screens/chat_screen.dart';
 import 'package:bubbles_in_flutter/screens/home_screen.dart';
 import 'package:bubbles_in_flutter/services/chats_service.dart';
 import 'package:flutter/material.dart';
+import 'package:bubbles_in_flutter/services/bubbles_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await ChatsService.instance.init();
+  await BubblesService.instance.init();
 
   runApp(const MainApp());
 }
