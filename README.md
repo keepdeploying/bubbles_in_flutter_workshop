@@ -124,7 +124,7 @@ import 'package:bubbles_in_flutter/services/notifications_permissions_service.da
 final notifService = NotificationsPermissionService.instance;
 ```
 
-7. In the `actions` list of the `AppBar` widget, add a StreamBuilder on the `isGrantedStream` of the service, that shows an `IconButton` that to request permissions if not granted:
+7. In the `actions` list of the AppBar widget, add a StreamBuilder on the `isGrantedStream` of the service, that shows an IconButton that to request permissions if not granted:
 
 ```dart
 StreamBuilder(
@@ -268,7 +268,7 @@ await BubblesService.instance.init();
 import 'package:bubbles_in_flutter/services/bubbles_service.dart';
 ```
 
-12. In the `send` method of the `ChatsService` file, add the following code to show a Bubble with the created reply message, after the reply has been saved to the local database:
+12. In the `send` method of `ChatsService`, add the following code to show a Bubble with the created reply message, after the reply has been saved to the local database:
 
 ```dart
 await BubblesService.instance.show(contact, reply.text);
@@ -400,3 +400,7 @@ if (!bubbles.isInBubble)
 ```
 
 6. If the Flutter app is running, stop it and run it again. Otherwise, just still run the app with these new changes. Send a message to any animal and minimize the app. Tap the notification to open the app from the Bubble. The app should open to the ChatScreen of the animal the message was sent to. Try to navigate back to the HomeScreen from the ChatScreen. The bubble should simply close. Also notice that the AppBar back button and the "Open In New" icon for showing a bubble in the AppBar are not shown in the Bubble view.
+
+## Resources
+
+[Click here to learn more from the Google Slides used for this workshop](https://docs.google.com/presentation/d/1LcDe0-qkqzjDZKXbJLNMR2ca_LNRzY5M3EXPyhYpUHs/edit)
